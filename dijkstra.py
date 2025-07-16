@@ -26,7 +26,7 @@ max_int = 100000
 visited_points = []
 distances = [max_int for _ in range(points)]
 distances[start_point] = 0
-from_where = [0 for _ in range(points)]
+paths = [[0] for _ in range(points)]
 
 
 def visit(point):
@@ -39,7 +39,7 @@ def visit(point):
 
         if distances[road_finish_point] > self_distance + road_length: # 현재 distances에 있는 거리가 더 길면
             distances[road_finish_point] = self_distance + road_length # 갱신
-            from_where[road_finish_point] = point
+            paths[road_finish_point] = paths[point] + [road_finish_point]
 
     visited_points.append(point)
 
@@ -65,7 +65,7 @@ while len(visited_points) < points:
     visit(choose_point_to_visit())
 
     if n >= 100:
-        print("무한 반복 방지를 위해 자동 반복문 탈출")
+        print("무한 반복 방지를 위해 자동 반복문 탈출 (1)")
         break
     n += 1
 
@@ -73,3 +73,5 @@ while len(visited_points) < points:
 print("--- 각 지점별 최단거리 ---")
 for i in range(points):
     print(f"지점 {i} 최단거리: {distances[i]}")
+    
+    print(f"경로: {paths[i]}")
