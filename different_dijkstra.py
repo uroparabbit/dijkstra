@@ -1,19 +1,18 @@
 # 사용자가 사전 설정을 위해 조작하는 변수들
-points = 5 # 지점 개수 (ex: points = 5이면 0, 1, 2, 3, 4라는 이름의 지점 존재)
+points = 5
 roads = [
-    (0, 1, 2),
-    (0, 2, 5),
-    (0, 4, 20),
-    (1, 3, 2),
-    (1, 2, 1),
-    (2, 3, 1),
-    (2, 4, 5),
-    (3, 4, 1),
-] # (출발점, 도착점, 거리) 순으로 기재
-start_point = 0 # 내비게이션 출발 지점
-finish_point = 4 # 내비게이션 도착 지점
+    (0, 1, 1),    # 0 → 1 (거리 1)
+    (1, 4, 1),    # 1 → 4 (거리 1)  ← finish_point
+    (0, 2, 10),   # 0 → 2 (거리 10)
+    (2, 3, 10),   # 2 → 3 (거리 10)
+]
+start_point = 0
+finish_point = 4
 
-
+"""
+위 예시는, 전체 노드를 모두 방문하는지, 아니면 finish_point 노드에 방문 후 프로그램을 끝내는지에 따라
+다른 결과가 나온다. 
+"""
 
 # 아래부터 Dijkstra 알고리즘
 max_int = 100000
@@ -54,8 +53,9 @@ visit(start_point)
 
 
 n = 0
-while len(visited_points) < points:
-# while not finish_point in visited_points:
+# print("전부")
+# while len(visited_points) < points:
+while not finish_point in visited_points:
     visit(choose_point_to_visit())
 
     if n >= 100:
